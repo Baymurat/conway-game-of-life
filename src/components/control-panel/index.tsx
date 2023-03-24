@@ -10,6 +10,7 @@ const ControlPanel = () => {
   const {
     start,
     clear,
+    setSpeed,
     setGridWidth: contextSetGridWidth,
     setGridHeight: contextSetGridHeight
   } = useControlContext();
@@ -131,11 +132,11 @@ const ControlPanel = () => {
       </Box>
       <Box width="100%">
         <Slider
-          defaultValue={50}
+          defaultValue={100}
           aria-label="Default"
           valueLabelDisplay="auto"
           onChange={(_, nv) => {
-            console.log(nv);
+            setSpeed(Number(nv));
           }}
         />
       </Box>

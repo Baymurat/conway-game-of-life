@@ -4,7 +4,7 @@ import { useCustomRef } from '../../utils/hooks';
 import { useControlContext } from '../../context/controlContext'
 
 const GameField = () => {
-  const { gridWidth, gridHeight, isGameStarted } = useControlContext();
+  const { gridWidth, gridHeight, isGameStarted, speed } = useControlContext();
   const [divRef, setDivRef] = useCustomRef<HTMLDivElement>();
   const [basis, setBasis] = useState<number>(0)
   const [cells, setCells] = useState<number[][]>([[]])
@@ -25,6 +25,20 @@ const GameField = () => {
     const arr = new Array(gridHeight).fill(0).map(() => new Array(gridWidth).fill(0))
     setCells(arr)
   }, [gridWidth, gridHeight])
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timer
+    if (isGameStarted) {
+      intervalId = setInterval(() => {
+        console.log(1);
+
+      }, speed)
+    }
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [isGameStarted, speed])
 
   return (
     <Box
@@ -66,7 +80,6 @@ const GameField = () => {
                 }
               }}
             >
-
             </Box>
           ))}
         </Box>

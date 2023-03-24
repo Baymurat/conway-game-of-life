@@ -4,6 +4,8 @@ interface ControlContextType {
   isGameStarted: boolean
   gridWidth: number
   gridHeight: number
+  speed: number
+  setSpeed: (v: number) => void
   setGridWidth: (v: number) => void
   setGridHeight: (v: number) => void
   start: () => void
@@ -16,7 +18,11 @@ export const ControlContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [gridWidth, setGridWidth] = useState<number>(0)
   const [gridHeight, setGridHeight] = useState<number>(0)
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false)
+  const [speed, SS] = useState<number>(500)
 
+  const setSpeed = (val: number) => {
+    SS((Math.abs(1 - val / 100) * 2.5 + 0.5) * 1000)
+  }
   const start = () => setIsGameStarted(true)
   const clear = () => {
     setGridWidth(0)
@@ -29,6 +35,8 @@ export const ControlContextProvider: FC<PropsWithChildren> = ({ children }) => {
       isGameStarted,
       gridWidth,
       gridHeight,
+      speed,
+      setSpeed,
       setGridWidth,
       setGridHeight,
       start,
