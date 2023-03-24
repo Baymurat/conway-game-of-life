@@ -1,12 +1,18 @@
 import { Box, Button, Slider, Modal, TextField } from '@mui/material'
+import { useControlContext } from '../../context/controlContext'
 import { useState } from 'react'
 
-type Props = {}
-
-const ControlPanel = (props: Props) => {
+const ControlPanel = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [gridWidth, setGridWidth] = useState<number | ''>('')
   const [gridHeight, setGridHeight] = useState<number | ''>('')
+
+  const {
+    start,
+    clear,
+    setGridWidth: contextSetGridWidth,
+    setGridHeight: contextSetGridHeight
+  } = useControlContext();
 
   return (
     <Box
@@ -72,6 +78,31 @@ const ControlPanel = (props: Props) => {
                 }
               }}
             />
+            <Button
+              fullWidth
+              variant='contained'
+              color='success'
+              onClick={() => {
+                contextSetGridWidth(gridWidth === '' ? 0 : gridWidth)
+                contextSetGridHeight(gridHeight === '' ? 0 : gridHeight)
+                setGridWidth('')
+                setGridHeight('')
+                setIsOpen(false)
+              }}
+            >
+              Accept
+            </Button>
+            <Button
+              fullWidth
+              variant='contained'
+              onClick={() => {
+                setGridWidth('')
+                setGridHeight('')
+                setIsOpen(false)
+              }}
+            >
+              Cancel
+            </Button>
           </Box>
         </Modal>
         <Button
@@ -85,6 +116,7 @@ const ControlPanel = (props: Props) => {
           fullWidth
           variant='contained'
           color='success'
+          onClick={start}
         >
           Start
         </Button>
@@ -92,6 +124,7 @@ const ControlPanel = (props: Props) => {
           fullWidth
           variant='contained'
           color='error'
+          onClick={clear}
         >
           Clear gameboard
         </Button>
