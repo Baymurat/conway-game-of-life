@@ -1,4 +1,4 @@
-import { Box, Button, Slider, Modal, TextField } from '@mui/material'
+import { Box, Button, Slider, Modal, TextField, Typography } from '@mui/material'
 import { useControlContext } from '../../context/controlContext'
 import { useState } from 'react'
 
@@ -131,14 +131,38 @@ const ControlPanel = () => {
         </Button>
       </Box>
       <Box width="100%">
-        <Slider
-          defaultValue={100}
-          aria-label="Default"
-          valueLabelDisplay="auto"
-          onChange={(_, nv) => {
-            setSpeed(Number(nv));
-          }}
-        />
+        <Typography
+          variant='h5'
+          // component='h4'
+          id="slowdown-level"
+          gutterBottom
+        >
+          Slowdown Level
+        </Typography>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          gap="1rem"
+        >
+          <Typography id="faster" gutterBottom>
+            Faster
+          </Typography>
+          <Slider
+            min={0.5}
+            max={3}
+            step={0.001}
+            defaultValue={3}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            onChange={(_, nv) => {
+              setSpeed(Number(nv) * 1000);
+            }}
+          />
+          <Typography id="slower" gutterBottom>
+            Slower
+          </Typography>
+        </Box>
       </Box>
     </Box>
   )
