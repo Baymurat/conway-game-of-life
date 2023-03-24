@@ -40,9 +40,11 @@ const GameField = () => {
       {cells.map((row, y) => (
         <Box
           display="flex"
+          key={y}
         >
           {row.map((cell, x) => (
             <Box
+              key={`${y}${x}`}
               border="1px solid gray"
               width={basis}
               height={basis}
