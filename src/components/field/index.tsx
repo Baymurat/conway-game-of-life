@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import { useCustomRef } from '../../utils/hooks';
+import { calculateNextGeneration } from '../../utils/logic';
 import { useControlContext } from '../../context/controlContext'
 
 const GameField = () => {
@@ -29,9 +30,10 @@ const GameField = () => {
   useEffect(() => {
     let intervalId: NodeJS.Timer
     if (isGameStarted) {
+      let nextCells = cells
       intervalId = setInterval(() => {
-        console.log(1);
-
+        nextCells = calculateNextGeneration(nextCells)
+        setCells(nextCells)
       }, speed)
     }
 
@@ -50,6 +52,7 @@ const GameField = () => {
       alignItems="center"
       justifyContent="center"
       ref={setDivRef}
+      overflow="scroll"
     >
       {cells.map((row, y) => (
         <Box

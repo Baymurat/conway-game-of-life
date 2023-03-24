@@ -21,7 +21,7 @@ const ControlPanel = () => {
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      flex="2 0 auto"
+      flex="1 0 auto"
       bgcolor="#fff"
       height="100%"
       borderLeft="1px solid gray"
